@@ -10,19 +10,16 @@ public class HelpDesk {
         this.name = name;
     }
 
-    /** Serve the next client in line */
     public void serveNext() {
         int serving = qm.getCurrentNumber();
         System.out.println(name + " is now serving queue # " + serving);
-        // after serving, the number stays until next client takes a ticket
+ 
     }
 
-    /** Admin function – reset queue */
     public void resetQueue(int newNumber) {
         qm.reset(newNumber);
     }
 
-    /** Interactive menu for this desk */
     public void runMenu(Scanner sc) {
         while (true) {
             System.out.println("\n--- " + name + " ---");
@@ -53,4 +50,5 @@ public class HelpDesk {
             }
         }
     }
+
 }
