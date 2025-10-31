@@ -5,19 +5,15 @@ public class Application {
     public static void main(String[] args) {
         QueueManager qm = QueueManager.getInstance();
 
-        // Start remote monitoring in background
         QueueDisplay monitor = new QueueDisplay();
         monitor.start();
-
-        // Create three help-desk stations
+        
         HelpDesk desk1 = new HelpDesk("Help Desk 1");
         HelpDesk desk2 = new HelpDesk("Help Desk 2");
         HelpDesk desk3 = new HelpDesk("Help Desk 3");
 
-        // Use ONE shared Scanner for client input (do NOT close it!)
         Scanner clientScanner = new Scanner(System.in);
 
-        // ---------- CLIENT SIDE (take a number) ----------
         System.out.println("\n╔══════════════════════════════════╗");
         System.out.println("        CLIENT TICKET MACHINE");
         System.out.println("╚══════════════════════════════════╝\n");
@@ -27,18 +23,17 @@ public class Application {
             if (line.equalsIgnoreCase("q")) break;
             qm.nextNumber();
         }
-        // DO NOT close clientScanner → keep System.in open!
 
-        // ---------- STAFF SIDE (three desks run concurrently) ----------
+
+
         System.out.println("\n╔══════════════════════════════════╗");
         System.out.println("            STAFF - DESK");
         System.out.println("╚══════════════════════════════════╝\n");
 
-        // Each desk gets its own Scanner (still uses open System.in)
         Thread t1 = new Thread(() -> {
             Scanner sc = new Scanner(System.in);
             desk1.runMenu(sc);
-            // DO NOT close sc here → let JVM handle it
+
         }, "Desk1-Thread");
 
         Thread t2 = new Thread(() -> {
@@ -53,7 +48,6 @@ public class Application {
 
         t1.start(); t2.start(); t3.start();
 
-        // Wait for all desks to finish
         try {
             t1.join();
             t2.join();
@@ -65,7 +59,7 @@ public class Application {
         monitor.stopMonitoring();
         System.out.println("System shutdown. Goodbye!");
 
-        // Optional: close clientScanner ONLY at the very end
-        clientScanner.close(); // Now safe — no more input expected
+        clientScanner.close(); 
     }
+
 }
