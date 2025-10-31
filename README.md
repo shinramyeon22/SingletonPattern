@@ -1,5 +1,5 @@
 ## Singleton Pattern
-#Centralized Queuing System for Pag-ibig Office
+# Centralized Queuing System for Pag-ibig Office
 
 The Pag-ibig office implements a centralized queuing system for three help desk stations. Individuals visiting the office obtain a queue number from this centralized system. Additionally, there's an online monitoring system that displays the current queued number in real-time for individuals monitoring the queue remotely.
 
