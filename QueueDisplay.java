@@ -16,9 +16,9 @@ public class QueueDisplay extends Thread {
             try { Thread.sleep(800); } catch (InterruptedException ignored) {}
         }
     }
-
     public void stopMonitoring() {
         running = false;
         interrupt();
     }
+
 }
